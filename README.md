@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/unfoldingWord-dev/android-gogs-client.svg?branch=master)](https://travis-ci.org/unfoldingWord-dev/android-gogs-client)
 # android-gogs-client
 A client library for interacting with the [Gogs](https://gogs.io) REST api. This library is written to communicate according to the api defined in [gogits/go-gogs-client](https://github.com/gogits/go-gogs-client/wiki).
 
@@ -25,7 +24,7 @@ To use this library your Android project must be configured to use the JCenter o
 
 Add the following to your package dependencies and sync gradle.
 ```
-compile 'org.unfoldingword.tools:gogs-client:1.6.0'
+compile 'org.wycliffeassociates.tools:gogs-client:1.7.0'
 ```
 
 ##Usage

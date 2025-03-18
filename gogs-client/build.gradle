@@ -1,23 +1,20 @@
 apply plugin: 'com.android.library'
 
 ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'gogs-client'
-
-    publishedGroupId = 'org.unfoldingword.tools'
+    publishedGroupId = 'org.wycliffeassociates.tools'
     libraryName = 'Gogs Client'
     artifact = 'gogs-client'
 
     libraryDescription = 'An android library for interacting with the Gogs REST api.'
 
-    siteUrl = 'https://github.com/unfoldingWord-dev/android-gogs-client'
-    gitUrl = 'https://github.com/unfoldingWord-dev/android-gogs-client.git'
+    siteUrl = 'https://github.com/WycliffeAssociates/android-gogs-client'
+    gitUrl = 'https://github.com/WycliffeAssociates/android-gogs-client.git'
 
-    libraryVersion = '1.6.1'
+    libraryVersion = '1.7.0'
 
-    developerId = 'neutrinog'
-    developerName = 'Joel'
-    developerEmail = 'joel@neutrinographics.com'
+    developerId = 'wa'
+    developerName = 'WA'
+    developerEmail = 'wa@wycliffeassociates.com'
 
     licenseName = 'GNU GENERAL PUBLIC LICENSE, Version 2.0'
     licenseUrl = 'http://www.gnu.org/licenses/gpl-2.0.en.html'
@@ -25,14 +22,15 @@ ext {
 }
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
-
+    namespace "org.wycliffeassociates.tools"
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 22
-        versionCode 7
-        versionName "1.6.1"
+        compileSdk 35
+        minSdk 15
+        targetSdk 34
+        versionCode 8
+        versionName "1.7.0"
+
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
     }
     buildTypes {
         release {
@@ -43,11 +41,6 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-}
-
-if (System.env.TRAVIS != 'true') {
-    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+    implementation(fileTree(dir: 'libs', include: ['*.jar']))
+    implementation('junit:junit:4.13.2')
 }
