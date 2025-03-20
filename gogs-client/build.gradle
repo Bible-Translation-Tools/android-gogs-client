@@ -1,28 +1,12 @@
-apply plugin: 'com.android.library'
+import com.vanniktech.maven.publish.SonatypeHost
 
-ext {
-    publishedGroupId = 'org.wycliffeassociates.tools'
-    libraryName = 'Gogs Client'
-    artifact = 'gogs-client'
-
-    libraryDescription = 'An android library for interacting with the Gogs REST api.'
-
-    siteUrl = 'https://github.com/WycliffeAssociates/android-gogs-client'
-    gitUrl = 'https://github.com/WycliffeAssociates/android-gogs-client.git'
-
-    libraryVersion = '1.7.0'
-
-    developerId = 'wa'
-    developerName = 'WA'
-    developerEmail = 'wa@wycliffeassociates.com'
-
-    licenseName = 'GNU GENERAL PUBLIC LICENSE, Version 2.0'
-    licenseUrl = 'http://www.gnu.org/licenses/gpl-2.0.en.html'
-    allLicenses = ["GPL-2.0"]
+plugins {
+    id "com.android.library"
+    id "com.vanniktech.maven.publish"
 }
 
 android {
-    namespace "org.wycliffeassociates.tools"
+    namespace "org.bibletranslationtools.tools"
     defaultConfig {
         compileSdk 35
         minSdk 15
@@ -38,9 +22,50 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
+    }
 }
 
 dependencies {
     implementation(fileTree(dir: 'libs', include: ['*.jar']))
     implementation('junit:junit:4.13.2')
+}
+
+mavenPublishing {
+    coordinates("io.github.mxaln.tools", "gogs-client", "1.7.0")
+
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    signAllPublications()
+
+    pom {
+        name = "Gogs Client"
+        description = "An android library for interacting with the Gogs REST api."
+        inceptionYear = "2025"
+        url = "https://github.com/bibletranslationtools/android-gogs-client/"
+        licenses {
+            license {
+                name = "GNU GENERAL PUBLIC LICENSE, Version 2.0"
+                url = "http://www.gnu.org/licenses/gpl-2.0.en.html"
+                distribution = "repo"
+            }
+        }
+        developers {
+            developer {
+                id = "bibletranslationtools"
+                name = "BibleTranslationTools"
+                url = "https://github.com/bibletranslationtools/"
+            }
+        }
+        scm {
+            url = "https://github.com/bibletranslationtools/android-gogs-client/"
+            connection = "scm:git:git://github.com/bibletranslationtools/android-gogs-client.git"
+            developerConnection = "scm:git:ssh://git@github.com/bibletranslationtools/android-gogs-client.git"
+        }
+        issueManagement {
+            url = "https://github.com/bibletranslationtools/android-gogs-client/issues"
+            system = "github"
+        }
+    }
 }

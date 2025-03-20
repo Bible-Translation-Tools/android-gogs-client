@@ -24,7 +24,7 @@ To use this library your Android project must be configured to use the JCenter o
 
 Add the following to your package dependencies and sync gradle.
 ```
-compile 'org.wycliffeassociates.tools:gogs-client:1.7.0'
+compile 'org.bibletranslationtools.tools:gogs-client:1.7.0'
 ```
 
 ##Usage

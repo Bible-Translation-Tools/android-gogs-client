@@ -5,8 +5,12 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.7.3'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     }
+}
+
+plugins {
+    id "com.vanniktech.maven.publish" version "0.28.0" apply false
+    id "com.gradleup.nmcp" version "0.0.7" apply false
 }
 
 allprojects {
