@@ -37,7 +37,7 @@ public class Token {
             Token token = new Token();
             token.name = (String)Util.getFromJSON(json, "name", null);
             token.sha1 = (String)Util.getFromJSON(json, "sha1", null);
-            token.scopes = (String[])Util.getFromJSON(json, "scopes", new String[]{"all"});
+            token.scopes = Util.getArrayFromJSON(json, "scopes", new String[]{"all"});
             return token;
         }
         return null;

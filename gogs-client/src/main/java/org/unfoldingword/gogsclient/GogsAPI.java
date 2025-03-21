@@ -417,7 +417,7 @@ public class GogsAPI {
             JSONObject json = new JSONObject();
             try {
                 json.put("name", token.getName());
-                json.put("scopes", token.getScopes());
+                json.put("scopes", Util.getJSONFromArray(token.getScopes()));
                 Response response = request(String.format("/users/%s/tokens", user.getUsername()), user, json.toString());
                 if(response.code == 201 && response.data != null) {
                     return Token.fromJSON(new JSONObject(response.data));
