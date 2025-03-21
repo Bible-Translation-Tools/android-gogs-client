@@ -9,6 +9,7 @@ import org.json.JSONObject;
 public class Token {
     private String name = null;
     private String sha1 = null;
+    private String[] scopes = new String[]{"all"};
 
     private Token() {}
 
@@ -21,6 +22,12 @@ public class Token {
         this.sha1 = sha1;
     }
 
+    public Token(String name, String sha1, String[] scopes) {
+        this.name = name;
+        this.sha1 = sha1;
+        this.scopes = scopes;
+    }
+
     /**
      * Returns a token parsed from json
      * @param json
@@ -31,6 +38,7 @@ public class Token {
             Token token = new Token();
             token.name = (String)Util.getFromJSON(json, "name", null);
             token.sha1 = (String)Util.getFromJSON(json, "sha1", null);
+            token.scopes = (String[])Util.getFromJSON(json, "scopes", null);
             return token;
         }
         return null;
@@ -45,6 +53,7 @@ public class Token {
         JSONObject json = new JSONObject();
         json.put("name", this.name);
         json.put("sha1", this.sha1);
+        json.put("scopes", this.scopes);
         return json;
     }
 
@@ -59,5 +68,13 @@ public class Token {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Returns the scopes of the token
+     * @return
+     */
+    public String[] getScopes() {
+        return scopes;
     }
 }

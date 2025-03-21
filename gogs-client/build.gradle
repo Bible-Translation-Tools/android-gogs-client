@@ -1,38 +1,20 @@
-apply plugin: 'com.android.library'
+import com.vanniktech.maven.publish.SonatypeHost
 
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'gogs-client'
-
-    publishedGroupId = 'org.unfoldingword.tools'
-    libraryName = 'Gogs Client'
-    artifact = 'gogs-client'
-
-    libraryDescription = 'An android library for interacting with the Gogs REST api.'
-
-    siteUrl = 'https://github.com/unfoldingWord-dev/android-gogs-client'
-    gitUrl = 'https://github.com/unfoldingWord-dev/android-gogs-client.git'
-
-    libraryVersion = '1.6.1'
-
-    developerId = 'neutrinog'
-    developerName = 'Joel'
-    developerEmail = 'joel@neutrinographics.com'
-
-    licenseName = 'GNU GENERAL PUBLIC LICENSE, Version 2.0'
-    licenseUrl = 'http://www.gnu.org/licenses/gpl-2.0.en.html'
-    allLicenses = ["GPL-2.0"]
+plugins {
+    id "com.android.library"
+    id "com.vanniktech.maven.publish"
 }
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
-
+    namespace "org.bibletranslationtools.tools"
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 22
-        versionCode 7
-        versionName "1.6.1"
+        compileSdk 35
+        minSdk 15
+        targetSdk 34
+        versionCode 8
+        versionName "1.7.1"
+
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
     }
     buildTypes {
         release {
@@ -40,14 +22,50 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
+    implementation(fileTree(dir: 'libs', include: ['*.jar']))
+    implementation('junit:junit:4.13.2')
 }
 
-if (System.env.TRAVIS != 'true') {
-    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+mavenPublishing {
+    coordinates("io.github.mxaln.tools", "gogs-client", "1.7.2")
+
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    signAllPublications()
+
+    pom {
+        name = "Gogs Client"
+        description = "An android library for interacting with the Gogs REST api."
+        inceptionYear = "2025"
+        url = "https://github.com/bibletranslationtools/android-gogs-client/"
+        licenses {
+            license {
+                name = "GNU GENERAL PUBLIC LICENSE, Version 2.0"
+                url = "http://www.gnu.org/licenses/gpl-2.0.en.html"
+                distribution = "repo"
+            }
+        }
+        developers {
+            developer {
+                id = "bibletranslationtools"
+                name = "BibleTranslationTools"
+                url = "https://github.com/bibletranslationtools/"
+            }
+        }
+        scm {
+            url = "https://github.com/bibletranslationtools/android-gogs-client/"
+            connection = "scm:git:git://github.com/bibletranslationtools/android-gogs-client.git"
+            developerConnection = "scm:git:ssh://git@github.com/bibletranslationtools/android-gogs-client.git"
+        }
+        issueManagement {
+            url = "https://github.com/bibletranslationtools/android-gogs-client/issues"
+            system = "github"
+        }
+    }
 }
