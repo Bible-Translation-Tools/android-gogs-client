@@ -12,7 +12,7 @@ android {
         minSdk 15
         targetSdk 34
         versionCode 8
-        versionName "1.7.2"
+        versionName "1.7.3"
 
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
     }
@@ -34,7 +34,7 @@ dependencies {
 }
 
 mavenPublishing {
-    coordinates("io.github.mxaln.tools", "gogs-client", "1.7.2")
+    coordinates("io.github.mxaln.tools", "gogs-client", "1.7.3")
 
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
     signAllPublications()
