@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace "org.bibletranslationtools.tools"
+    namespace "org.bibletranslationtools.gogsclient"
     defaultConfig {
         compileSdk 35
         minSdk 15
