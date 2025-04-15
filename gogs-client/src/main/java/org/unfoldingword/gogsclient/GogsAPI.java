@@ -24,13 +24,19 @@ public class GogsAPI {
     private int connectionTimeout = 5000;
     private final String baseUrl;
     private Response lastResponse = null;
+    private String userAgent = null;
 
     /**
      * Creates an instance of the api client
      * @param apiUrl the api end point e.g. "https://try.gogs.io/api/v1"
      */
     public GogsAPI(String apiUrl) {
+        this(apiUrl, null);
+    }
+
+    public GogsAPI(String apiUrl, String userAgent) {
         this.baseUrl = apiUrl.replaceAll("/+$", "") + "/";
+        this.userAgent = userAgent;
     }
 
     /**
@@ -97,6 +103,10 @@ public class GogsAPI {
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setReadTimeout(this.readTimeout);
             conn.setConnectTimeout(this.connectionTimeout);
+
+            if (userAgent != null && !userAgent.trim().isEmpty()) {
+                conn.setRequestProperty("User-Agent", userAgent);
+            }
 
             // custom request method
             if(requestMethod != null) {
