@@ -20,8 +20,8 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class GogsAPI {
 
-    private int readTimeout = 5000;
-    private int connectionTimeout = 5000;
+    private int readTimeout = 30000;
+    private int connectionTimeout = 30000;
     private final String baseUrl;
     private Response lastResponse = null;
     private String userAgent = null;
