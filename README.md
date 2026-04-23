@@ -20,11 +20,11 @@ A client library for interacting with the [Gogs](https://gogs.io) REST api. This
 * delete public key
 
 ##Installation
-To use this library your Android project must be configured to use the JCenter or Maven Central repositories.
+To use this library your Android project must be configured to use the Maven Central repositories.
 
-Add the following to your package dependencies and sync gradle.
+Add the following to your package dependencies and sync Gradle.
 ```
-compile 'org.bibletranslationtools:gogs-client:1.7.4'
+implementation 'org.bibletranslationtools:gogs-client:2.0.1'
 ```
 
 ##Usage
