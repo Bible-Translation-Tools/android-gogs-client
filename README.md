@@ -1,7 +1,11 @@
-# android-gogs-client
+# kmp-gogs-client
 A client library for interacting with the [Gogs](https://gogs.io) REST api. This library is written to communicate according to the api defined in [gogits/go-gogs-client](https://github.com/gogits/go-gogs-client/wiki).
 
-##Supported Operations
+## Supported Platforms
+* Android
+* Desktop (JVM)
+
+## Supported Operations
 * create user
 * edit user
 * search users
@@ -19,15 +23,15 @@ A client library for interacting with the [Gogs](https://gogs.io) REST api. This
 * list public keys
 * delete public key
 
-##Installation
+## Installation
 To use this library your Android project must be configured to use the Maven Central repositories.
 
 Add the following to your package dependencies and sync Gradle.
 ```
-implementation 'org.bibletranslationtools:gogs-client:2.0.1'
+implementation 'org.bibletranslationtools:gogs-client:2.0.2'
 ```
 
-##Usage
+## Usage
 ```
 GogsAPI api = new GogsAPI("https://try.gogs.io/api/v1"); // change to any gogs server
 List<User> users = api.searchUsers("some-user-name", 5, null);

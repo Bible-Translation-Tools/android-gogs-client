@@ -201,7 +201,7 @@ class GogsAPI(
     suspend fun createRepo(repo: Repository, user: User): Repository? =
         postResource("/user/repos", user, buildJsonObject {
             put("name", repo.name)
-            repo.description?.let { put("description", it) }
+            put("description", repo.description)
             put("private", repo.isPrivate)
         })
 
