@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "org.bibletranslationtools"
-version = "2.0.2"
+version = "2.0.3"
 
 kotlin {
     jvmToolchain(11)
@@ -30,7 +30,7 @@ kotlin {
             dependencies {
                 implementation kotlin("test")
                 implementation "io.ktor:ktor-client-mock:3.4.3"
-                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2"
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.11.0"
             }
         }
     }
