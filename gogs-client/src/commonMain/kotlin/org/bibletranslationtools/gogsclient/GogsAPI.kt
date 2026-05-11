@@ -11,6 +11,7 @@ import io.ktor.client.request.header
 import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
@@ -68,12 +69,16 @@ class GogsAPI(
             val response = client.get(baseUrl + path.trimStart('/')) {
                 setupRequest(user)
             }
-            _lastResponse = Response(
-                response.status.isSuccess(),
-                response.status.value,
-                response.status.description
-            )
-            if (response.status.isSuccess()) response.body<T>() else null
+            if (response.status.isSuccess()) {
+                response.body<T>()
+            } else {
+                _lastResponse = Response(
+                    response.status.isSuccess(),
+                    response.status.value,
+                    response.bodyAsText()
+                )
+                null
+            }
         } catch (e: Exception) {
             _lastResponse = Response(false, -1, e.message)
             null
@@ -90,12 +95,16 @@ class GogsAPI(
                 setupRequest(user)
                 setBody(body)
             }
-            _lastResponse = Response(
-                response.status.isSuccess(),
-                response.status.value,
-                response.status.description
-            )
-            if (response.status.isSuccess()) response.body<T>() else null
+            if (response.status.isSuccess()) {
+                response.body<T>()
+            } else {
+                _lastResponse = Response(
+                    response.status.isSuccess(),
+                    response.status.value,
+                    response.bodyAsText()
+                )
+                null
+            }
         } catch (e: Exception) {
             _lastResponse = Response(false, -1, e.message)
             null
@@ -112,12 +121,16 @@ class GogsAPI(
                 setupRequest(user)
                 setBody(body)
             }
-            _lastResponse = Response(
-                response.status.isSuccess(),
-                response.status.value,
-                response.status.description
-            )
-            if (response.status.isSuccess()) response.body<T>() else null
+            if (response.status.isSuccess()) {
+                response.body<T>()
+            } else {
+                _lastResponse = Response(
+                    response.status.isSuccess(),
+                    response.status.value,
+                    response.bodyAsText()
+                )
+                null
+            }
         } catch (e: Exception) {
             _lastResponse = Response(false, -1, e.message)
             null
@@ -130,11 +143,13 @@ class GogsAPI(
                 setupRequest(user)
             }
             val success = response.status == HttpStatusCode.NoContent
-            _lastResponse = Response(
-                success,
-                response.status.value,
-                response.status.description
-            )
+            if (!success) {
+                _lastResponse = Response(
+                    response.status.isSuccess(),
+                    response.status.value,
+                    response.bodyAsText()
+                )
+            }
             success
         } catch (e: Exception) {
             _lastResponse = Response(false, -1, e.message)
