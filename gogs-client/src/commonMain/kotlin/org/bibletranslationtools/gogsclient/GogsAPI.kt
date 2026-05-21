@@ -65,22 +65,19 @@ class GogsAPI(
     }
 
     private suspend inline fun <reified T> getResource(path: String, user: User?): T? {
-        return try {
+        return runCatching {
             val response = client.get(baseUrl + path.trimStart('/')) {
                 setupRequest(user)
             }
             if (response.status.isSuccess()) {
+                _lastResponse = null
                 response.body<T>()
             } else {
-                _lastResponse = Response(
-                    response.status.isSuccess(),
-                    response.status.value,
-                    response.bodyAsText()
-                )
+                _lastResponse = Response(response.status.value, response.bodyAsText())
                 null
             }
-        } catch (e: Exception) {
-            _lastResponse = Response(false, -1, e.message)
+        }.getOrElse { e ->
+            _lastResponse = Response(-1, e.message)
             null
         }
     }
@@ -90,23 +87,20 @@ class GogsAPI(
         user: User?,
         body: JsonObject
     ): T? {
-        return try {
+        return runCatching {
             val response = client.post(baseUrl + path.trimStart('/')) {
                 setupRequest(user)
                 setBody(body)
             }
             if (response.status.isSuccess()) {
+                _lastResponse = null
                 response.body<T>()
             } else {
-                _lastResponse = Response(
-                    response.status.isSuccess(),
-                    response.status.value,
-                    response.bodyAsText()
-                )
+                _lastResponse = Response(response.status.value, response.bodyAsText())
                 null
             }
-        } catch (e: Exception) {
-            _lastResponse = Response(false, -1, e.message)
+        }.getOrElse { e ->
+            _lastResponse = Response(-1, e.message)
             null
         }
     }
@@ -116,43 +110,38 @@ class GogsAPI(
         user: User?,
         body: JsonObject
     ): T? {
-        return try {
+        return runCatching {
             val response = client.patch(baseUrl + path.trimStart('/')) {
                 setupRequest(user)
                 setBody(body)
             }
             if (response.status.isSuccess()) {
+                _lastResponse = null
                 response.body<T>()
             } else {
-                _lastResponse = Response(
-                    response.status.isSuccess(),
-                    response.status.value,
-                    response.bodyAsText()
-                )
+                _lastResponse = Response(response.status.value, response.bodyAsText())
                 null
             }
-        } catch (e: Exception) {
-            _lastResponse = Response(false, -1, e.message)
+        }.getOrElse { e ->
+            _lastResponse = Response(-1, e.message)
             null
         }
     }
 
     private suspend fun deleteResource(path: String, user: User?): Boolean {
-        return try {
+        return runCatching {
             val response = client.delete(baseUrl + path.trimStart('/')) {
                 setupRequest(user)
             }
-            val success = response.status == HttpStatusCode.NoContent
-            if (!success) {
-                _lastResponse = Response(
-                    response.status.isSuccess(),
-                    response.status.value,
-                    response.bodyAsText()
-                )
+            if (response.status == HttpStatusCode.NoContent) {
+                _lastResponse = null
+                true
+            } else {
+                _lastResponse = Response(response.status.value, response.bodyAsText())
+                false
             }
-            success
-        } catch (e: Exception) {
-            _lastResponse = Response(false, -1, e.message)
+        }.getOrElse { e ->
+            _lastResponse = Response(-1, e.message)
             false
         }
     }

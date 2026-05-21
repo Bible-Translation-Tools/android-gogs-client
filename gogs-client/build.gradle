@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "org.bibletranslationtools"
-version = "2.0.3"
+version = "2.0.4"
 
 kotlin {
     jvmToolchain(11)
@@ -19,17 +19,17 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation "io.ktor:ktor-client-core:3.4.3"
-                implementation "io.ktor:ktor-client-okhttp:3.4.3"
-                implementation "io.ktor:ktor-client-content-negotiation:3.4.3"
-                implementation "io.ktor:ktor-serialization-kotlinx-json:3.4.3"
+                implementation "io.ktor:ktor-client-core:3.5.0"
+                implementation "io.ktor:ktor-client-okhttp:3.5.0"
+                implementation "io.ktor:ktor-client-content-negotiation:3.5.0"
+                implementation "io.ktor:ktor-serialization-kotlinx-json:3.5.0"
             }
         }
 
         commonTest {
             dependencies {
                 implementation kotlin("test")
-                implementation "io.ktor:ktor-client-mock:3.4.3"
+                implementation "io.ktor:ktor-client-mock:3.5.0"
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.11.0"
             }
         }
