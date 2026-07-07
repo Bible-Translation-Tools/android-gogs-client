@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "org.bibletranslationtools"
-version = "2.0.4"
+version = "2.0.5"
 
 kotlin {
     jvmToolchain(11)
@@ -19,17 +19,17 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation "io.ktor:ktor-client-core:3.5.0"
-                implementation "io.ktor:ktor-client-okhttp:3.5.0"
-                implementation "io.ktor:ktor-client-content-negotiation:3.5.0"
-                implementation "io.ktor:ktor-serialization-kotlinx-json:3.5.0"
+                implementation "io.ktor:ktor-client-core:3.5.1"
+                implementation "io.ktor:ktor-client-okhttp:3.5.1"
+                implementation "io.ktor:ktor-client-content-negotiation:3.5.1"
+                implementation "io.ktor:ktor-serialization-kotlinx-json:3.5.1"
             }
         }
 
         commonTest {
             dependencies {
                 implementation kotlin("test")
-                implementation "io.ktor:ktor-client-mock:3.5.0"
+                implementation "io.ktor:ktor-client-mock:3.5.1"
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.11.0"
             }
         }
@@ -93,8 +93,8 @@ publishing {
                 : "https://nexus-registry.walink.org/repository/maven-releases"
 
             credentials {
-                username = project.findProperty("repoUser") ?: System.getenv("REPO_USER")
-                password = project.findProperty("repoPassword") ?: System.getenv("REPO_PASSWORD")
+                username = project.findProperty("nexusUsername") ?: System.getenv("NEXUS_USER")
+                password = project.findProperty("nexusUsername") ?: System.getenv("NEXUS_PASSWORD")
             }
         }
     }
